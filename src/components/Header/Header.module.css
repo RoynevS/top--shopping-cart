@@ -1,0 +1,16 @@
+.header {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.list {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+  align-items: center;
+}
+
+.list li a {
+  text-decoration: none;
+}
