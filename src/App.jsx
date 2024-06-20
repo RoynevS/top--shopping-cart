@@ -10,14 +10,14 @@ function App() {
   const { site } = useParams();
   const [itemsInCart, setItemsInCart] = useState([]);
 
-  const setItems = (product, amount) => {
+  const setItems = (product, amount, status) => {
     if (itemsInCart.find((element) => element.id === product.id)) {
       setItemsInCart(
         itemsInCart.map((element) => {
           if (element.id === product.id) {
             return {
               ...product,
-              amount: element.amount + amount,
+              amount: status === "cart" ? amount : element.amount + amount,
             };
           }
           return element;
@@ -35,7 +35,11 @@ function App() {
       {site === "products" ? (
         <Products setItems={setItems} />
       ) : site === "cart" ? (
-        <Cart itemsInCart={itemsInCart} setItems={setItems} />
+        <Cart
+          itemsInCart={itemsInCart}
+          setItemsInCart={setItemsInCart}
+          setItems={setItems}
+        />
       ) : (
         <HomePage />
       )}
