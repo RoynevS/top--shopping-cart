@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import Product from "../../components/Product/Product";
 import Button from "../../components/Button/Button";
 
@@ -16,17 +17,26 @@ const Cart = ({ itemsInCart, setItemsInCart, setItems }) => {
 
   return (
     <main>
-      {itemsInCart.map((product) => (
-        <Product
-          key={product.id}
-          product={product}
-          onClick={setItems}
-          onDelete={deleteProduct}
-          status="cart"
-        />
-      ))}
-      <p>{calculateTotal()}</p>
-      <Button text="Buy Products" onClick={() => alert(calculateTotal())} />
+      {itemsInCart.length === 0 ? (
+        <>
+          <h2>Cart is empty</h2>
+          <Link to="/products">Go to our Products</Link>
+        </>
+      ) : (
+        <>
+          {itemsInCart.map((product) => (
+            <Product
+              key={product.id}
+              product={product}
+              onClick={setItems}
+              onDelete={deleteProduct}
+              status="cart"
+            />
+          ))}
+          <p>{calculateTotal()}</p>
+          <Button text="Buy Products" onClick={() => alert(calculateTotal())} />
+        </>
+      )}
     </main>
   );
 };
