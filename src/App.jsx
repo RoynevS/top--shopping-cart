@@ -10,22 +10,22 @@ function App() {
   const { site } = useParams();
   const [itemsInCart, setItemsInCart] = useState([]);
 
-  const setItems = (id, amount) => {
-    if (itemsInCart.find((product) => product.id === id)) {
+  const setItems = (product, amount) => {
+    if (itemsInCart.find((element) => element.id === product.id)) {
       setItemsInCart(
-        itemsInCart.map((product) => {
-          if (product.id === id) {
+        itemsInCart.map((element) => {
+          if (element.id === product.id) {
             return {
-              id: product.id,
-              amount: product.amount + amount,
+              ...product,
+              amount: element.amount + amount,
             };
           }
-          return product;
+          return element;
         })
       );
       return;
     }
-    setItemsInCart([...itemsInCart, { id, amount }]);
+    setItemsInCart([...itemsInCart, { ...product, amount }]);
     console.log(itemsInCart);
   };
 

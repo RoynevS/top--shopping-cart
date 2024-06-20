@@ -22,14 +22,15 @@ const Products = ({ setItems }) => {
       {products.map((product) => (
         <Product
           key={product.id}
-          id={product.id}
-          src={product.image}
-          rating={product.rating.rate}
-          count={product.rating.count}
-          title={product.title}
-          description={product.description}
-          category={product.category}
-          price={product.price}
+          product={product}
+          // id={product.id}
+          // src={product.image}
+          // rating={product.rating.rate}
+          // count={product.rating.count}
+          // title={product.title}
+          // description={product.description}
+          // category={product.category}
+          // price={product.price}
           onClick={setItems}
         />
       ))}
