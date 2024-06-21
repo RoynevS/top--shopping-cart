@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
+import styles from "./Filter.module.css";
+import { toTitleCase } from "../../utility/utility";
 
 const Filter = ({ filterProducts, categories, filter }) => {
   const [search, setSearch] = useState("");
@@ -20,8 +22,8 @@ const Filter = ({ filterProducts, categories, filter }) => {
   };
 
   return (
-    <aside>
-      <form>
+    <aside className={styles.filterWrapper}>
+      <form className={styles.form}>
         <div>
           <label htmlFor="search">Search</label>
           <input
@@ -43,12 +45,12 @@ const Filter = ({ filterProducts, categories, filter }) => {
             <option value="all">All</option>
             {categories.map((category) => (
               <option key={category} value={category}>
-                {category}
+                {toTitleCase(category)}
               </option>
             ))}
           </select>
         </div>
-        <div>
+        <div className={styles.priceRange}>
           <label htmlFor="price-slider">Price</label>
           <input
             type="range"
@@ -60,7 +62,7 @@ const Filter = ({ filterProducts, categories, filter }) => {
             max={1000}
             step={10}
           />
-          <output>{sliderValue}</output>
+          <output>{`${sliderValue}$`}</output>
         </div>
       </form>
     </aside>
