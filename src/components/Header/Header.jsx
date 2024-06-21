@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 const Header = ({ itemsInCart }) => {
   return (
     <header className={styles.header}>
-      <nav>
+      <nav className={styles.nav}>
         <ul className={styles.list}>
           <li>
             <Link to="/">Home</Link>
@@ -15,9 +15,13 @@ const Header = ({ itemsInCart }) => {
           </li>
           <li>
             <Link to="/cart">Cart</Link>
-          </li>
-          <li>
-            <span>{itemsInCart.length || null}</span>
+            <span
+              className={`${styles.cartAmount} ${
+                itemsInCart.length && styles.visible
+              }`}
+            >
+              {itemsInCart.length || 0}
+            </span>
           </li>
         </ul>
       </nav>
