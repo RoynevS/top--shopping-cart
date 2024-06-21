@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Product from "../../components/Product/Product";
 import Button from "../../components/Button/Button";
+import styles from "./Cart.module.css";
 
 const Cart = ({ itemsInCart, setItemsInCart, setItems }) => {
   const deleteProduct = (id) => {
@@ -16,27 +17,35 @@ const Cart = ({ itemsInCart, setItemsInCart, setItems }) => {
   };
 
   return (
-    <main>
-      {itemsInCart.length === 0 ? (
-        <>
-          <h2>Cart is empty</h2>
-          <Link to="/products">Go to our Products</Link>
-        </>
-      ) : (
-        <>
-          {itemsInCart.map((product) => (
-            <Product
-              key={product.id}
-              product={product}
-              onClick={setItems}
-              onDelete={deleteProduct}
-              status="cart"
-            />
-          ))}
-          <p>{calculateTotal()}</p>
-          <Button text="Buy Products" onClick={() => alert(calculateTotal())} />
-        </>
-      )}
+    <main className={styles.cartMain}>
+      <div className={styles.cartWrapper}>
+        {itemsInCart.length === 0 ? (
+          <>
+            <h2>Cart is empty</h2>
+            <Link to="/products">Go to our Products</Link>
+          </>
+        ) : (
+          <>
+            {itemsInCart.map((product) => (
+              <Product
+                key={product.id}
+                product={product}
+                onClick={setItems}
+                onDelete={deleteProduct}
+                status="cart"
+              />
+            ))}
+            <div className={styles.buyProductsDiv}>
+              <p className={styles.total}>Total: {calculateTotal()}$</p>
+              <Button
+                text="Buy Products"
+                onClick={() => alert(calculateTotal())}
+                className="buyProductsBtn"
+              />
+            </div>
+          </>
+        )}
+      </div>
     </main>
   );
 };

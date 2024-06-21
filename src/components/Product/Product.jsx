@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import styles from "./Product.module.css";
 import { useState } from "react";
 import Button from "../Button/Button";
+import { toTitleCase } from "../../utility/utility";
 
 const Product = ({ product, onClick, onDelete, status = "product" }) => {
   // if product is in cart it has an amount so we set the amount to that
@@ -14,7 +15,7 @@ const Product = ({ product, onClick, onDelete, status = "product" }) => {
   };
 
   return (
-    <div>
+    <div className={styles.productCard}>
       <div>
         <img
           src={product.image}
@@ -24,7 +25,8 @@ const Product = ({ product, onClick, onDelete, status = "product" }) => {
         {status === "product" && (
           <div className={styles.ratingWrapper}>
             <p className={styles.productRating}>
-              Rating: {product.rating.rate}
+              <span className={styles.rating}>Rating:</span>{" "}
+              {product.rating.rate}
             </p>
             <p className={styles.productCount}>{product.rating.count}</p>
           </div>
@@ -35,51 +37,68 @@ const Product = ({ product, onClick, onDelete, status = "product" }) => {
         {status === "product" && (
           <>
             <p className={styles.productDescription}>{product.description}</p>
-            <p className={styles.productCategory}>{product.category}</p>
+            <p className={styles.productCategory}>
+              {toTitleCase(product.category)}
+            </p>
           </>
         )}
       </div>
       <div className={styles.priceWrapper}>
-        <p className={styles.productPrice}>{product.price}</p>
-        {status === "product" ? (
-          <Button
-            text="-"
-            onClick={() => amount > 1 && setAmount(amount - 1)}
-          />
-        ) : (
-          <Button
-            text="-"
-            onClick={() => {
-              amount > 1 && setAmount((prevAmount) => prevAmount - 1);
-              onClick(product, amount - 1, status);
-            }}
-          />
-        )}
+        <p className={styles.productPrice}>{`${product.price}$`}</p>
+        <div className={styles.amountWrapper}>
+          {status === "product" ? (
+            <Button
+              text="-"
+              onClick={() => amount > 1 && setAmount(amount - 1)}
+              className="amountBtn"
+            />
+          ) : (
+            <Button
+              text="-"
+              onClick={() => {
+                amount > 1 && setAmount((prevAmount) => prevAmount - 1);
+                onClick(product, amount - 1, status);
+              }}
+              className="amountBtn"
+            />
+          )}
 
-        <input
-          type="number"
-          value={amount}
-          onChange={(event) => onChangeInput(event.target.value)}
-        />
-        {status === "product" ? (
-          <Button text="+" onClick={() => setAmount(amount + 1)} />
-        ) : (
-          <Button
-            text="+"
-            onClick={() => {
-              setAmount((prevAmount) => prevAmount + 1);
-              onClick(product, amount + 1, status);
-            }}
+          <input
+            className={styles.amountInput}
+            type="number"
+            value={amount}
+            onChange={(event) => onChangeInput(event.target.value)}
           />
-        )}
+          {status === "product" ? (
+            <Button
+              text="+"
+              onClick={() => setAmount(amount + 1)}
+              className="amountBtn"
+            />
+          ) : (
+            <Button
+              text="+"
+              onClick={() => {
+                setAmount((prevAmount) => prevAmount + 1);
+                onClick(product, amount + 1, status);
+              }}
+              className="amountBtn"
+            />
+          )}
+        </div>
 
         {status === "product" ? (
           <Button
             text="Add to Cart"
             onClick={() => onClick(product, amount, status)}
+            className="addToCart"
           />
         ) : (
-          <Button text="Delete" onClick={() => onDelete(product.id)} />
+          <Button
+            text="Delete"
+            onClick={() => onDelete(product.id)}
+            className="deleteBtn"
+          />
         )}
       </div>
     </div>
