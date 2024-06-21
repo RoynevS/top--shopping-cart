@@ -26,7 +26,6 @@ function App() {
       return;
     }
     setItemsInCart([...itemsInCart, { ...product, amount }]);
-    console.log(itemsInCart);
   };
 
   return (
