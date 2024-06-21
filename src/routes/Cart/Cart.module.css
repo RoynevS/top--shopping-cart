@@ -1,0 +1,21 @@
+.cartMain {
+  background-color: #b3d9d5;
+}
+
+.cartWrapper {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.buyProductsDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 2rem;
+}
+
+.total {
+  font-weight: 700;
+  font-size: 3rem;
+}

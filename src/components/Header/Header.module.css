@@ -1,4 +1,10 @@
 .header {
+  background-color: #007f73;
+  position: sticky;
+  top: 0;
+}
+
+.nav {
   width: 1200px;
   margin: 0 auto;
   padding: 1rem;
@@ -9,8 +15,28 @@
   list-style: none;
   gap: 1rem;
   align-items: center;
+  justify-content: space-around;
 }
 
 .list li a {
   text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.list li a:hover {
+  color: #4ccd99;
+}
+
+.cartAmount {
+  visibility: hidden;
+  color: #fff;
+  margin-left: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.visible {
+  visibility: visible;
 }

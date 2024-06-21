@@ -1,0 +1,39 @@
+.footer {
+  background-color: #007f73;
+  padding: 2rem;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.ul {
+  list-style: none;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+  gap: 10rem;
+}
+
+.columnContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.heading {
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.flexContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.copyright {
+  margin-top: 1rem;
+  font-size: 0.75rem;
+}

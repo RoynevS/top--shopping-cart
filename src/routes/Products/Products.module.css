@@ -1,0 +1,8 @@
+.mainContainer {
+  display: flex;
+}
+
+.productContainer {
+  padding: 2rem;
+  background-color: #b3d9d5;
+}

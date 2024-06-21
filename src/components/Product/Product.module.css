@@ -1,5 +1,64 @@
+.productCard {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  background-color: #fff;
+  padding: 1rem;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+}
+
 .productImage {
   width: 200px;
   height: 200px;
   object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+.ratingWrapper {
+  display: flex;
+  gap: 1rem;
+  margin-left: 2.5rem;
+}
+
+.rating {
+  font-weight: 700;
+}
+
+.descriptionWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 50%;
+  margin-right: auto;
+}
+
+.descriptionWrapper h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.descriptionWrapper .productDescription {
+  margin-bottom: auto;
+}
+
+.priceWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 10rem;
+  gap: 1rem;
+}
+
+.productPrice {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.amountWrapper {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.amountInput {
+  width: 3rem;
 }
