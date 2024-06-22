@@ -1,13 +1,15 @@
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import HomePage from "./routes/HomePage/HomePage";
 import Products from "./routes/Products/Products";
 import Cart from "./routes/Cart/Cart";
+import ErrorPage from "./routes/ErrorPage/ErrorPage";
 
 function App() {
-  const { site } = useParams();
+  const locationObj = useLocation();
+  const location = locationObj.pathname;
   const [itemsInCart, setItemsInCart] = useState([]);
 
   const setItems = (product, amount, status) => {
@@ -31,16 +33,18 @@ function App() {
   return (
     <>
       <Header itemsInCart={itemsInCart} />
-      {site === "products" ? (
+      {location === "/" ? (
+        <HomePage />
+      ) : location === "/products" ? (
         <Products setItems={setItems} />
-      ) : site === "cart" ? (
+      ) : location === "/cart" ? (
         <Cart
           itemsInCart={itemsInCart}
           setItemsInCart={setItemsInCart}
           setItems={setItems}
         />
       ) : (
-        <HomePage />
+        <ErrorPage />
       )}
       <Footer />
     </>
