@@ -44,7 +44,9 @@ const Product = ({ product, onClick, onDelete, status = "product" }) => {
         )}
       </div>
       <div className={styles.priceWrapper}>
-        <p className={styles.productPrice}>{`${product.price}$`}</p>
+        <p className={styles.productPrice}>{`${(
+          Math.round(product.price * 100) / 100
+        ).toFixed(2)}$`}</p>
         <div className={styles.amountWrapper}>
           {status === "product" ? (
             <Button

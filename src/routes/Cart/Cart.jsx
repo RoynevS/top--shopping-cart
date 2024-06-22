@@ -11,9 +11,10 @@ const Cart = ({ itemsInCart, setItemsInCart, setItems }) => {
   };
 
   const calculateTotal = () => {
-    return itemsInCart
+    const total = itemsInCart
       .map((product) => product.price * product.amount)
       .reduce((acc, cur) => acc + cur, 0);
+    return (Math.round(total * 100) / 100).toFixed(2);
   };
 
   return (
