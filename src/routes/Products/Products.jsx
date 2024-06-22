@@ -6,6 +6,7 @@ import styles from "./Products.module.css";
 
 const Products = ({ setItems }) => {
   const [products, setProducts] = useState([]);
+  const [error, setError] = useState(null);
   const [categories, setCategories] = useState([]);
   const [filter, setFilter] = useState({
     title: "",
@@ -15,11 +16,23 @@ const Products = ({ setItems }) => {
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
-      .then((data) => data.json())
-      .then((products) => setProducts(products));
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error: Status ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((products) => setProducts(products))
+      .catch((error) => setError(error.message));
     fetch("https://fakestoreapi.com/products/categories")
-      .then((data) => data.json())
-      .then((categories) => setCategories(categories));
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error: Status ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((categories) => setCategories(categories))
+      .catch((error) => setError(error.message));
   }, []);
 
   const filterProducts = (filterObj) => {
@@ -37,6 +50,8 @@ const Products = ({ setItems }) => {
       return product.category === filter.category;
     })
     .filter((product) => product.price <= filter.price);
+
+  if (error) return <h2>{error}</h2>;
 
   if (products.length === 0 || categories.length === 0)
     return <h2>Loading...</h2>;
