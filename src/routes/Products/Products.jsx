@@ -27,7 +27,11 @@ const Products = ({ setItems }) => {
   };
 
   const displayFilteredProducts = products
-    .filter((product) => product.title.toLowerCase().includes(filter.title))
+    .filter(
+      (product) =>
+        product.description.toLowerCase().includes(filter.title) ||
+        product.title.toLowerCase().includes(filter.title)
+    )
     .filter((product) => {
       if (filter.category === "all") return true;
       return product.category === filter.category;

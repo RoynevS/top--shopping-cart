@@ -9,7 +9,7 @@ const Filter = ({ filterProducts, categories, filter }) => {
 
   const changeSearchHandler = (event) => {
     setSearch(event.target.value);
-    filterProducts({ ...filter, title: event.target.value });
+    filterProducts({ ...filter, title: event.target.value.toLowerCase() });
   };
 
   const changeCategoryHandler = (event) => {
