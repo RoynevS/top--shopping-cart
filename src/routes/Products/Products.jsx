@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import Product from "../../components/Product/Product";
 import Filter from "../../components/Filter/Filter";
 import styles from "./Products.module.css";
 
-const Products = ({ setItems }) => {
+const Products = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const [categories, setCategories] = useState([]);
@@ -68,16 +67,12 @@ const Products = ({ setItems }) => {
           <h2>No matches found</h2>
         ) : (
           displayFilteredProducts.map((product) => (
-            <Product key={product.id} product={product} onClick={setItems} />
+            <Product key={product.id} product={product} />
           ))
         )}
       </section>
     </main>
   );
-};
-
-Products.propTypes = {
-  setItems: PropTypes.func,
 };
 
 export default Products;

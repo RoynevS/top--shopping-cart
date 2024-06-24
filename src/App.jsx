@@ -1,11 +1,16 @@
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
+import { createContext, useState } from "react";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import HomePage from "./routes/HomePage/HomePage";
 import Products from "./routes/Products/Products";
 import Cart from "./routes/Cart/Cart";
 import ErrorPage from "./routes/ErrorPage/ErrorPage";
+
+const CartContext = createContext({
+  itemsInCart: [],
+  setItems: () => {},
+});
 
 function App() {
   const locationObj = useLocation();
@@ -32,23 +37,26 @@ function App() {
 
   return (
     <>
-      <Header itemsInCart={itemsInCart} />
-      {location === "/" ? (
-        <HomePage />
-      ) : location === "/products" ? (
-        <Products setItems={setItems} />
-      ) : location === "/cart" ? (
-        <Cart
-          itemsInCart={itemsInCart}
-          setItemsInCart={setItemsInCart}
-          setItems={setItems}
-        />
-      ) : (
-        <ErrorPage />
-      )}
+      <CartContext.Provider value={{ itemsInCart, setItems }}>
+        <Header />
+        {location === "/" ? (
+          <HomePage />
+        ) : location === "/products" ? (
+          <Products />
+        ) : location === "/cart" ? (
+          <Cart
+            itemsInCart={itemsInCart}
+            setItemsInCart={setItemsInCart}
+            setItems={setItems}
+          />
+        ) : (
+          <ErrorPage />
+        )}
+      </CartContext.Provider>
       <Footer />
     </>
   );
 }
 
 export default App;
+export { CartContext };

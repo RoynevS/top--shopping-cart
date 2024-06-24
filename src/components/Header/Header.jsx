@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
-import PropTypes from "prop-types";
+import { useContext } from "react";
+import { CartContext } from "../../App";
 
-const Header = ({ itemsInCart }) => {
+const Header = () => {
+  const { itemsInCart } = useContext(CartContext);
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
@@ -27,10 +29,6 @@ const Header = ({ itemsInCart }) => {
       </nav>
     </header>
   );
-};
-
-Header.propTypes = {
-  itemsInCart: PropTypes.array,
 };
 
 export default Header;

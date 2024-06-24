@@ -4,8 +4,11 @@ import Product from "../../components/Product/Product";
 import Button from "../../components/Button/Button";
 import styles from "./Cart.module.css";
 import { calculateTotal } from "../../utility/utility";
+import { useContext } from "react";
+import { CartContext } from "../../App";
 
-const Cart = ({ itemsInCart, setItemsInCart, setItems }) => {
+const Cart = ({ setItemsInCart }) => {
+  const { itemsInCart } = useContext(CartContext);
   const deleteProduct = (id) => {
     const newProducts = itemsInCart.filter((product) => product.id !== id);
     setItemsInCart([...newProducts]);
@@ -27,7 +30,6 @@ const Cart = ({ itemsInCart, setItemsInCart, setItems }) => {
               <Product
                 key={product.id}
                 product={product}
-                onClick={setItems}
                 onDelete={deleteProduct}
                 status="cart"
               />
@@ -48,9 +50,7 @@ const Cart = ({ itemsInCart, setItemsInCart, setItems }) => {
 };
 
 Cart.propTypes = {
-  itemsInCart: PropTypes.array,
   setItemsInCart: PropTypes.func,
-  setItems: PropTypes.func,
 };
 
 export default Cart;

@@ -1,17 +1,19 @@
 import PropTypes from "prop-types";
 import styles from "./Product.module.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Button from "../Button/Button";
 import { toTitleCase } from "../../utility/utility";
+import { CartContext } from "../../App";
 
-const Product = ({ product, onClick, onDelete, status = "product" }) => {
+const Product = ({ product, onDelete, status = "product" }) => {
   // if product is in cart it has an amount so we set the amount to that
+  const { setItems } = useContext(CartContext);
   const [amount, setAmount] = useState(product.amount || 1);
 
   const onChangeInput = (value) => {
     if (typeof value === "number" || typeof value === "string")
       setAmount(parseInt(value));
-    if (status === "cart") onClick(product, value, status);
+    if (status === "cart") setItems(product, value, status);
   };
 
   return (
@@ -59,7 +61,7 @@ const Product = ({ product, onClick, onDelete, status = "product" }) => {
               text="-"
               onClick={() => {
                 amount > 1 && setAmount((prevAmount) => prevAmount - 1);
-                onClick(product, amount - 1, status);
+                setItems(product, amount - 1, status);
               }}
               className="amountBtn"
             />
@@ -82,7 +84,7 @@ const Product = ({ product, onClick, onDelete, status = "product" }) => {
               text="+"
               onClick={() => {
                 setAmount((prevAmount) => prevAmount + 1);
-                onClick(product, amount + 1, status);
+                setItems(product, amount + 1, status);
               }}
               className="amountBtn"
             />
@@ -92,7 +94,7 @@ const Product = ({ product, onClick, onDelete, status = "product" }) => {
         {status === "product" ? (
           <Button
             text="Add to Cart"
-            onClick={() => onClick(product, amount, status)}
+            onClick={() => setItems(product, amount, status)}
             className="addToCart"
           />
         ) : (
@@ -109,7 +111,6 @@ const Product = ({ product, onClick, onDelete, status = "product" }) => {
 
 Product.propTypes = {
   product: PropTypes.object,
-  onClick: PropTypes.func,
   onDelete: PropTypes.func,
   status: PropTypes.string,
 };
