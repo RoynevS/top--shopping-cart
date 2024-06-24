@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { calculateTotal, toTitleCase } from "../utility/utility";
 
 describe("toTitleCase utility function", () => {
@@ -14,8 +15,13 @@ describe("toTitleCase utility function", () => {
       "This is just a tribute"
     );
   });
+
   it("works when string starts with whitespace", () => {
     expect(toTitleCase("     hello")).toBe("Hello");
+  });
+
+  it("numbers are ignored", () => {
+    expect(toTitleCase("49")).toBe("49");
   });
 });
 
