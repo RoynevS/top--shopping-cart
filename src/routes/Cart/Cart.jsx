@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Product from "../../components/Product/Product";
 import Button from "../../components/Button/Button";
 import styles from "./Cart.module.css";
+import { calculateTotal } from "../../utility/utility";
 
 const Cart = ({ itemsInCart, setItemsInCart, setItems }) => {
   const deleteProduct = (id) => {
@@ -10,12 +11,7 @@ const Cart = ({ itemsInCart, setItemsInCart, setItems }) => {
     setItemsInCart([...newProducts]);
   };
 
-  const calculateTotal = () => {
-    const total = itemsInCart
-      .map((product) => product.price * product.amount)
-      .reduce((acc, cur) => acc + cur, 0);
-    return (Math.round(total * 100) / 100).toFixed(2);
-  };
+  const total = calculateTotal(itemsInCart);
 
   return (
     <main className={styles.cartMain}>
@@ -37,10 +33,10 @@ const Cart = ({ itemsInCart, setItemsInCart, setItems }) => {
               />
             ))}
             <div className={styles.buyProductsDiv}>
-              <p className={styles.total}>Total: {calculateTotal()}$</p>
+              <p className={styles.total}>Total: {total}$</p>
               <Button
                 text="Buy Products"
-                onClick={() => alert(calculateTotal())}
+                onClick={() => alert(total)}
                 className="buyProductsBtn"
               />
             </div>
